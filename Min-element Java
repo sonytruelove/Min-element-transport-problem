@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+public class Main
+{
+    static int []demand={120,50,190,110};
+    static int []supply={160,140,170};
+    static int [][]cost={{7,8,1,2},{4,5,9,8},{9,2,3,6}};
+    static int numSource=3, numDemand=4;
+    static int [][]allocations=new int[numSource][numDemand];
+	public static void main(String[] args) {
+           Scanner scanner = new Scanner(System.in);
+           int source = 0;
+           int dest = 0;
+           for(int k = 0; k < numSource+numDemand-1; k++)
+                {
+                 int minCost = 100000;
+                 for (int i = 0; i < numSource; i++)
+                  {
+                    for (int j = 0; j < numDemand; j++)
+                    {
+                        if (cost[i][j] < minCost && demand[j] > 0 && allocations[i][j]==0 && supply[i]>0)
+                        {
+                            minCost = cost[i][j];
+                            dest = j;
+                            source = i;
+                        }
+                    }
+                  }
+                    int quantity = Math.min(supply[source], demand[dest]);
+                    allocations[source][dest] = quantity;
+                    supply[source] -= quantity;
+                    demand[dest] -= quantity;
+                }
+                System.out.println("Начальный план:");
+                for (int i = 0; i < numSource; i++)
+                {
+                    for (int j = 0; j < numDemand; j++)
+                    {
+                        System.out.print(allocations[i][j]+"  ");
+                    }
+                System.out.println();
+                }
+                int totalCost = 0;
+                for (int i = 0; i < numSource; i++)
+                {
+                    for (int j = 0; j < numDemand; j++)
+                    {
+                        totalCost += allocations[i][j] * cost[i][j];
+                    }
+                }
+          System.out.println("Общая стоимость перевозки: "+totalCost);}}
