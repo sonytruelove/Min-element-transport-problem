@@ -1,2 +1,3 @@
 # Min-element-transport-problem
-:taxi: Find a basic feasible solution on Java
+Find a basic feasible solution on Java.<br>
+Нахождение опорного плана транспортной задачи методом минимального элемента.
